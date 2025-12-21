@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp - Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Signup form -->
+        <div class="signup-form">
+            <h2 class="form-header">
+                <i class="fas fa-comment-dots"></i>
+                ChatApp
+            </h2>
+            <p class="form-subheader">Sign up to start chatting with friends and family</p>
+            
+            <form id="signupForm" onsubmit="signup(event)">
+                <div class="input-group double">
+                    <div class="input-field">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" placeholder="Enter your first name" required>
+                        <div class="error-message" id="firstNameError">Please enter a valid first name</div>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" placeholder="Enter your last name" required>
+                        <div class="error-message" id="lastNameError">Please enter a valid last name</div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email address" required>
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a strong password" required>
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <i class="far fa-eye"></i>
+                    </button>
+                    <div class="error-message" id="passwordError">Password must be at least 8 characters long</div>
+                </div>
+                
+                <button type="submit" class="signup-button">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                
+                <!-- Divider -->
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <!-- Google Sign In Button -->
+                <button type="button" class="google-signin-button" id="googleSignIn">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
+            </form>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure & Private</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <span>Fast Messaging</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <span>Group Chats</span>
+                </div>
+            </div>
+            
+            <div class="login-link">
+                Already have an account? <a href="./login.html">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = togglePassword.querySelector('i');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            if (type === 'text') {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
+        
+        // Form validation
+        const signupForm = document.getElementById('signupForm');
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const emailInput = document.getElementById('email');
+        const passwordInputField = document.getElementById('password');
+        
+        // Error elements
+        const firstNameError = document.getElementById('firstNameError');
+        const lastNameError = document.getElementById('lastNameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        
+        // Google Sign In Button
+        const googleSignInButton = document.getElementById('googleSignIn');
+        
+        // Google Sign In Functionality
+        googleSignInButton.addEventListener('click', function() {
+            // Show loading state
+            const originalText = googleSignInButton.innerHTML;
+            googleSignInButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+            googleSignInButton.disabled = true;
+            
+            // Simulate Google OAuth flow
+            setTimeout(() => {
+                // In a real app, you would implement actual Google OAuth here
+                // This is a simulation for demo purposes
+                
+                // Generate random user data for demo
+                const randomId = Math.floor(Math.random() * 10000);
+                const demoUsers = [
+                    { firstName: 'Alex', lastName: 'Johnson', email: `alex.johnson${randomId}@gmail.com` },
+                    { firstName: 'Maria', lastName: 'Garcia', email: `maria.garcia${randomId}@gmail.com` },
+                    { firstName: 'David', lastName: 'Smith', email: `david.smith${randomId}@gmail.com` },
+                    { firstName: 'Sarah', lastName: 'Williams', email: `sarah.williams${randomId}@gmail.com` }
+                ];
+                
+                const randomUser = demoUsers[Math.floor(Math.random() * demoUsers.length)];
+                
+                // Fill form with Google data
+                firstNameInput.value = randomUser.firstName;
+                lastNameInput.value = randomUser.lastName;
+                emailInput.value = randomUser.email;
+                passwordInputField.value = 'google-oauth-password-' + randomId;
+                
+                // Validate the auto-filled fields
+                validateFirstName();
+                validateLastName();
+                validateEmail();
+                validatePassword();
+                
+                // Show success message
+                alert(`Signed in with Google as ${randomUser.email}\n\nClick "Create Account" to complete registration.`);
+                
+                // Restore button
+                googleSignInButton.innerHTML = originalText;
+                googleSignInButton.disabled = false;
+                
+                // Focus on the first name field for any edits
+                firstNameInput.focus();
+                
+            }, 1500);
+        });
+        
+        // Validation functions
+        function validateFirstName() {
+            const firstName = firstNameInput.value.trim();
+            if (firstName.length < 2) {
+                showError(firstNameInput, firstNameError);
+                return false;
+            } else {
+                showSuccess(firstNameInput);
+                return true;
+            }
+        }
+        
+        function validateLastName() {
+            const lastName = lastNameInput.value.trim();
+            if (lastName.length < 2) {
+                showError(lastNameInput, lastNameError);
+                return false;
+            } else {
+                showSuccess(lastNameInput);
+                return true;
+            }
+        }
+        
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                showError(emailInput, emailError);
+                return false;
+            } else {
+                showSuccess(emailInput);
+                return true;
+            }
+        }
+        
+        function validatePassword() {
+            const password = passwordInputField.value;
+            if (password.length < 8) {
+                showError(passwordInputField, passwordError);
+                return false;
+            } else {
+                showSuccess(passwordInputField);
+                return true;
+            }
+        }
+        
+        function showError(inputElement, errorElement) {
+            inputElement.classList.add('input-error');
+            inputElement.classList.remove('input-success');
+            errorElement.style.display = 'block';
+        }
+        
+        function showSuccess(inputElement) {
+            inputElement.classList.remove('input-error');
+            inputElement.classList.add('input-success');
+        }
+        
+        // Real-time validation
+        firstNameInput.addEventListener('input', validateFirstName);
+        lastNameInput.addEventListener('input', validateLastName);
+        emailInput.addEventListener('input', validateEmail);
+        passwordInputField.addEventListener('input', validatePassword);
+        
+        // Form submission
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const isFirstNameValid = validateFirstName();
+            const isLastNameValid = validateLastName();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            
+            if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
+                // Simulate form submission
+                const signupButton = document.querySelector('.signup-button');
+                const originalText = signupButton.innerHTML;
+                
+                signupButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+                signupButton.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    const email = emailInput.value.trim();
+                    const isGoogleAccount = email.includes('gmail.com') && passwordInputField.value.includes('google-oauth');
+                    
+                    if (isGoogleAccount) {
+                        alert(`Google account linked successfully!\nWelcome to ChatApp, ${firstNameInput.value.trim()}!`);
+                    } else {
+                        alert('Account created successfully! Welcome to ChatApp.');
+                    }
+                    
+                    signupButton.innerHTML = originalText;
+                    signupButton.disabled = false;
+                    signupForm.reset();
+                    
+                    // Clear success states
+                    const inputs = document.querySelectorAll('input');
+                    inputs.forEach(input => {
+                        input.classList.remove('input-success');
+                    });
+                }, 1500);
+            } else {
+                // Scroll to first error
+                const firstError = document.querySelector('.input-error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+        
+        // Add some visual feedback when inputs are focused
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+    </script> -->
+    <script type="module" src="config.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

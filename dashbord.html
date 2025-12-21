@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashbord.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-comment-dots"></i>
+            ChatApp
+        </div>
+
+        <div class="user-info">
+            <button class="logout-btn" >
+                <a href="./friends.html">Friends</a>
+            </button>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar" id="user-avatar"></div>
+            <div class="user-name" id="user-name"></div>
+            <button class="logout-btn" onclick="signout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main Container --> 
+    <div class="container">
+        <!-- Sidebar - Chat List -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Messages</h2>
+                <p>Chat with your friends and colleagues</p>
+                
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search conversations...">
+                </div>
+            </div>
+            
+            <div class="chat-list" id="chatList">
+                <!-- Active Chat -->
+                <!-- <div class="chat-item active">
+                    <div class="chat-avatar">AS</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Alex Smith</div>
+                        <div class="last-message">Are we still meeting tomorrow at 3 PM?</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">10:30 AM</div>
+                        <div class="unread-count">3</div>
+                    </div>
+                </div>
+                
+                <div class="chat-item">
+                    <div class="chat-avatar">MJ</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Maria Johnson</div>
+                        <div class="last-message">Thanks for helping with the project!</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Yesterday</div>
+                    </div>
+                </div>
+                
+                <div class="chat-item">
+                    <div class="chat-avatar">RW</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Robert Williams</div>
+                        <div class="last-message">Can you send me the files when you get a chance?</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Oct 12</div>
+                        <div class="unread-count">1</div>
+                    </div>
+                </div>
+                
+                <div class="chat-item">
+                    <div class="chat-avatar">ED</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Emma Davis</div>
+                        <div class="last-message">Looking forward to our call next week!</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Oct 10</div>
+                    </div>
+                </div>
+                
+                <div class="chat-item">
+                    <div class="chat-avatar">TB</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Thomas Brown</div>
+                        <div class="last-message">The meeting notes are attached to this message</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Oct 8</div>
+                    </div>
+                </div>
+                
+                <div class="chat-item">
+                    <div class="chat-avatar">SM</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Sarah Miller</div>
+                        <div class="last-message">Let me know if you need anything else</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Oct 5</div>
+                    </div>
+                </div>
+                
+                <div class="chat-item">
+                    <div class="chat-avatar">KW</div>
+                    <div class="chat-info">
+                        <div class="chat-name">Kevin Wilson</div>
+                        <div class="last-message">I'll be there in 10 minutes</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Oct 3</div>
+                        <div class="unread-count">2</div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Main Chat Area -->
+        <div class="chat-area">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <div class="current-chat-info">
+                    <div class="current-chat-avatar">AS</div>
+                    <div>
+                        <div class="current-chat-name">Alex Smith</div>
+                        <div class="current-chat-status">
+                            <i class="fas fa-circle"></i> Online
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-actions">
+                    <button class="chat-action-btn">
+                        <i class="fas fa-phone-alt"></i>
+                    </button>
+                    <button class="chat-action-btn">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="chat-action-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Messages Container -->
+            <div class="messages-container" id="messagesContainer">
+                <!-- Date separator -->
+                <div style="text-align: center; color: #999; font-size: 13px; margin: 10px 0;">
+                    Today
+                </div>
+                
+                <!-- Received message -->
+                <div class="message received">
+                    <div class="message-avatar">AS</div>
+                    <div class="message-content">
+                        <div class="message-text">Hey John! Are we still meeting tomorrow at 3 PM?</div>
+                        <div class="message-time">10:15 AM</div>
+                    </div>
+                </div>
+                
+                <!-- Sent message -->
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-text">Yes, absolutely! I've prepared the presentation already.</div>
+                        <div class="message-time">10:18 AM</div>
+                    </div>
+                    <div class="message-avatar">JD</div>
+                </div>
+                
+                <!-- Received message -->
+                <div class="message received">
+                    <div class="message-avatar">AS</div>
+                    <div class="message-content">
+                        <div class="message-text">Great! I've also invited Sarah from the marketing team. She'll join us for the first part of the meeting.</div>
+                        <div class="message-time">10:22 AM</div>
+                    </div>
+                </div>
+                
+                <!-- Sent message -->
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-text">That's perfect. I wanted to get her input on the new campaign strategy.</div>
+                        <div class="message-time">10:25 AM</div>
+                    </div>
+                    <div class="message-avatar">JD</div>
+                </div>
+                
+                <!-- Received message -->
+                <div class="message received">
+                    <div class="message-avatar">AS</div>
+                    <div class="message-content">
+                        <div class="message-text">Exactly! She has some great insights from the recent customer feedback. Can you send me the draft agenda when you get a chance?</div>
+                        <div class="message-time">10:30 AM</div>
+                    </div>
+                </div>
+                
+                <!-- Sent message -->
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-text">Sure, I'll send it over in about an hour. Just need to add a couple more points.</div>
+                        <div class="message-time">10:32 AM</div>
+                    </div>
+                    <div class="message-avatar">JD</div>
+                </div>
+            </div>
+            
+            <!-- Message Input -->
+            <div class="message-input-container">
+                <textarea class="message-input" placeholder="Type your message here..." id="messageInput"></textarea>
+                <button class="send-btn" id="sendButton">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+   
+    <script type="module" src="config.js"></script>
+    <script type="module" src="dashbord.js"></script>
+</body>
+</html>

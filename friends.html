@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp - Friends</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashbord.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-comment-dots"></i>
+            ChatApp
+        </div>
+
+        <div class="user-info">
+            <button class="logout-btn">
+                <a href="./dashbord.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-arrow-left"></i> Back to Chat
+                </a>
+            </button>
+        </div>
+
+        <div class="user-info">
+            <div class="user-avatar" id="user-avatar"></div>
+            <div class="user-name" id="user-name"></div>
+            <button class="logout-btn" onclick="signout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="friends-container">
+        <!-- People You May Know Section -->
+        <div class="friends-section">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-user-plus"></i> People You May Know</h2>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchPeople" placeholder="Search people..." onkeyup="searchPeople()">
+                </div>
+            </div>
+            <div class="chat-list" id="chatList">
+                <!-- Users will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Friend Requests Section -->
+        <div class="friends-section">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-user-clock"></i> Friend Requests</h2>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchRequests" placeholder="Search requests..." onkeyup="searchRequests()">
+                </div>
+            </div>
+            <div class="chat-list" id="friendRequest">
+                <!-- Friend requests will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Friends Section -->
+        <div class="friends-section">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-user-friends"></i> Friends</h2>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchFriends" placeholder="Search friends..." onkeyup="searchFriends()">
+                </div>
+            </div>
+            <div class="chat-list" id="friends">
+                <!-- Friends will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="config.js"></script>
+    <script type="module" src="friends2.js"></script>
+</body>
+
+</html>
